@@ -18,7 +18,7 @@ function App() {
     // const unSubscribe =
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // console.log("working");
+        console.log("working");
         dispatch(
           login({
             uid: user.uid,
@@ -49,9 +49,9 @@ function App() {
           <Route
             path="/profile"
             element={
-              // <ProtectedRoute>
-              <ProfileScreen />
-              // </ProtectedRoute>
+              <ProtectedRoute>
+                <ProfileScreen />
+              </ProtectedRoute>
             }
           />
           <Route path="/login" element={<LoginScreen />} />

@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "./row.css";
-import axios from "axios";
+import axios from "../../axios";
 
 const Row = ({ title, fetchUrl, isLargeRow = false }) => {
+  console.log(isLargeRow);
   const [movies, setMovies] = useState([]);
-  const base_url = "url from tmdb";
+  const base_url = "https://image.tmdb.org/t/p/original";
 
   useEffect(() => {
     const fetchData = async () => {
-      // const request = await axios.get(fetchUrl)
-      // setMovies(request.data.results)
-      // return request
+      const request = await axios.get(fetchUrl);
+      setMovies(request.data.results);
+      return request;
     };
     fetchData();
   }, [fetchUrl]);
-
+  console.log(movies);
   return (
     <div className="row">
       <h2>{title}</h2>
@@ -28,7 +29,7 @@ const Row = ({ title, fetchUrl, isLargeRow = false }) => {
                 className={`row_poster ${isLargeRow && "row_posterLarge"}`}
                 key={movie?.id}
                 src={`${base_url}${
-                  isLargeRow ? movies.poster_path : movies.backdrop_path
+                  isLargeRow ? movie.poster_path : movie.backdrop_path
                 }`}
                 alt=""
               />

@@ -6,7 +6,7 @@ import { selectUser } from "../features/userSlice";
 const ProtectedRoute = ({ children }) => {
   const user = useSelector((state) => state.user.user);
   console.log(user);
-  if (user === null) {
+  if (!user) {
     return <Navigate to="/login" />;
   }
 
